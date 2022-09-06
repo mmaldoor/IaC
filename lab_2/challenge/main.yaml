@@ -1,0 +1,36 @@
+heat_template_version: 2015-04-30
+
+description: From main
+parameters:
+  
+  image*:
+    type: string
+    description: Name of image to use for servers
+  flavor: 
+    type: string
+  linux_secgroup: 
+    type: comma_delimited_list
+    description: security group name
+
+
+resources:
+  networking:
+    type: network.yaml
+
+  server1:
+    type: OS::Heat::ResourceGroup
+    depends_on: networking
+    properties:
+      count: 3
+      resource_def:
+        type: webservice.yaml
+        properties:
+          name: my_server_%index%
+          image: { get_param: image* }
+          flavor: { get_param: flavor }
+          security_groups: { get_param: linux_secgroup }
+          private_subnet: { get_attr: [networking,private_subnet] }
+
+
+
+    

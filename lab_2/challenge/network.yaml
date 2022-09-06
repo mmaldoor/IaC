@@ -1,0 +1,35 @@
+heat_template_version: 2015-04-30
+
+description: from network
+resources:
+  private_net:
+    type: OS::Neutron::Net
+    properties:
+      name: net1 
+
+  private_subnet:
+    type: OS::Neutron::Subnet
+    properties:
+      network_id: { get_resource: private_net }
+      cidr: 192.168.100.0/24
+      gateway_ip: 192.168.100.1
+      allocation_pools:
+        - start: 192.168.100.200
+          end: 192.168.100.250
+
+  router:
+    type: OS::Neutron::Router
+    properties:
+      external_gateway_info:
+        network: ntnu-internal
+
+  router_interface:
+    type: OS::Neutron::RouterInterface
+    properties:
+      router_id: { get_resource: router }
+      subnet_id: { get_resource: private_subnet }
+
+
+outputs:
+  private_subnet:
+    value: { get_resource: private_subnet }
