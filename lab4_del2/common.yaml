@@ -1,0 +1,9 @@
+---
+
+gossinbackup::exclude: '/opt/gossin-backup/rsyncexcludes'
+gossinbackup::days:    '7'
+gossinbackup::months:    '12'
+gossinbackup::years: '3'
+gossinbackup::max_file_size: '100M'
+gossinbackup::exec_hours:    '2'
+gossinbackup::exec_minutes:    '15'

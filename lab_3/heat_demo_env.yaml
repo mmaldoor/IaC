@@ -1,0 +1,20 @@
+# parameter_defaults:
+#   linux_secgroup: default
+#   win_secgroup: default
+
+# parameter_merge_strategies:
+#   default: merge
+#   linux_secgroup: merge
+#   win_secgroup: merge
+parameters:
+  key_name: mmaldoor_key
+  image_linux: Puppet Learning VM 2019.0.2 6.10
+  flavor: m1.medium
+  public_net: ntnu-internal
+  private_net_name: net1
+  private_net_cidr: 192.168.100.0/24
+  private_net_gateway: 192.168.100.1
+  private_net_pool_start: 192.168.100.200
+  private_net_pool_end: 192.168.100.250
+  sec_groups_lin: default,linux
+  name_linux: puppet_learning_vm
